@@ -30,19 +30,20 @@ Util\FileSystem::copy($source . '/*.jpg', Constants::PATH_IMAGE); # JPEGのみ
 (new File\StandardOpf(new IO\FileWriter(Constants::PATH_STANDARD_OPF)))->write();
 (new File\NavigationDocumentsXhtml(new IO\FileWriter(Constants::PATH_NAV_DOC_XHTML)))->write();
 foreach (glob(Constants::PATH_IMAGE . '/*.jpg') as $each) {
-    $filename = pathinfo($each, PATHINFO_FILENAME);
-    (new File\ItemXhtml(new IO\FileWriter(sprintf(Constants::PATH_XHTML, $filename))))->write($filename);
+    $name = pathinfo($each, PATHINFO_FILENAME);
+    (new File\ItemXhtml(new IO\FileWriter(sprintf(Constants::PATH_ITEM_XHTML, $name))))->write($name);
 }
 
 // EPUB出力
 Util\Epub::create();
 
 // ディレクトリ・ファイルの削除
+/*
 Util\FileSystem::rm(Constants::PATH_MIMETYPE);
-
 foreach ([
     Constants::PATH_META_INF,
     Constants::PATH_ITEM
 ] as $each) {
     Util\FileSystem::rmdir($each);
 }
+*/

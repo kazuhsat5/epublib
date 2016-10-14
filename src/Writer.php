@@ -14,7 +14,7 @@ namespace Jcomi\Epub;
  *
  * @author kazuhsat <kazuhiro.sato@j-comi.co.jp>
  */
-class Writer implements WriterInterface
+class Writer
 {
     /**
      * ファイル名

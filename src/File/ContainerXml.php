@@ -43,15 +43,16 @@ class ContainerXml
      */
     public function write()
     {
-        $xml = <<<XML
-<?xml version="1.0"?>
-<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
-    <rootfiles>
-        <rootfile full-path="item/standard.opf" media-type="application/oebps-package+xml" />
-    </rootfiles>
-</container>
-XML;
+        $xml = new \SimpleXMLElement('<container />');
+        $xml->addAttribute('version', '1.0');
+        $xml->addAttribute('xmlns', 'urn:oasis:names:tc:opendocument:xmlns:container');
 
-        $this->writer->write($xml);
+        $rootfiles = $xml->addChild('rootfiles');
+
+        $rootfile = $rootfiles->addChild('rootfile');
+        $rootfile->addAttribute('full-path', 'item/standard.opf');
+        $rootfile->addAttribute('media-type', 'application/oebps-package+xml');
+
+        $this->writer->write($xml->asXML());
     }
 }

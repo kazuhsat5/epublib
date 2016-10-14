@@ -9,6 +9,11 @@
 
 namespace Jcomi\Epub;
 
+/**
+ * Constants
+ *
+ * @author kazuhsat <kazuhiro.sato@j-comi.co.jp>
+ */
 class Constants
 {
     /**

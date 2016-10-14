@@ -7,42 +7,43 @@
  * @copyright Copyright (C) 2015-2016 J-Comic Terrace Corporation. All Rights Reserved.
  */
 
-namespace Jcomi\Epub\File;
+namespace Jcomi\Epub\IO;
 
 use Jcomi\Epub;
 
 /**
- * Mimetype
+ * FileWriter
  *
  * @author kazuhsat <kazuhiro.sato@j-comi.co.jp>
  */
-class Mimetype
+class FileWriter implements Epub\WriterInterface
 {
     /**
-     * Writer
+     * ファイル名
      *
      * @var String
      */
-    private $writer;
+    private $filename;
 
     /**
      * コンストラクタ
      *
-     * @param Jcomi\Epub\Writer $writer
+     * @param String $filename ファイル名
      * @return void
      */
-    public function __construct(Epub\WriterInterface $writer)
+    public function __construct($filename)
     {
-        $this->writer = $writer;
+        $this->filename = $filename;
     }
 
     /**
-     * 書き出す
+     * 文字列を書き込む
      *
+     * @param String $str 文字列
      * @return boolean
      */
-    public function write()
+    public function write($str)
     {
-        $this->writer->write(Epub\Constants::MIMETYPE);
+        return (!file_put_contents($this->filename, $str)) ?: true;
     }
 }

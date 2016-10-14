@@ -9,6 +9,8 @@
 
 namespace Jcomi\Epub\File;
 
+use Jcomi\Epub;
+
 /**
  * NavigationDocumentsXhtml
  *
@@ -29,7 +31,7 @@ class NavigationDocumentsXhtml
      * @param Jcomi\Epub\Writer $writer
      * @return void
      */
-    public function __construct(WriterInterface $writer)
+    public function __construct(Epub\WriterInterface $writer)
     {
         $this->writer = $writer;
     }
@@ -56,7 +58,7 @@ class NavigationDocumentsXhtml
 
 XML;
 
-        foreach (glob(Constants::PATH_IMAGE . '/*.jpg') as $each) {
+        foreach (glob(Epub\Constants::PATH_IMAGE . '/*.jpg') as $each) {
             $filename = pathinfo($each, PATHINFO_FILENAME);
             $xml .= <<<XML
                 <li><a href="xhtml/{$filename}.xhtml">{$filename}</a></li>
@@ -73,7 +75,7 @@ XML;
 
 XML;
 
-        foreach (glob(Constants::PATH_IMAGE . '/*.jpg') as $each) {
+        foreach (glob(Epub\Constants::PATH_IMAGE . '/*.jpg') as $each) {
             $filename = pathinfo($each, PATHINFO_FILENAME);
             $xml .= <<<XML
                 <li><a epub:type="cover" href="xhtml/{$filename}.xhtml">{$filename}</a></li>

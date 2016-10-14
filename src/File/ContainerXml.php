@@ -9,6 +9,8 @@
 
 namespace Jcomi\Epub\File;
 
+use Jcomi\Epub;
+
 /**
  * ContainerXml
  *
@@ -29,7 +31,7 @@ class ContainerXml
      * @param Jcomi\Epub\Writer $writer
      * @return void
      */
-    public function __construct(WriterInterface $writer)
+    public function __construct(Epub\WriterInterface $writer)
     {
         $this->writer = $writer;
     }

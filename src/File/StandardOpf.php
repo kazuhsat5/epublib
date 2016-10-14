@@ -9,6 +9,8 @@
 
 namespace Jcomi\Epub\File;
 
+use Jcomi\Epub;
+
 /**
  * StandardOpf
  *
@@ -29,7 +31,7 @@ class StandardOpf
      * @param Jcomi\Epub\Writer $writer
      * @return void
      */
-    public function __construct(WriterInterface $writer)
+    public function __construct(Epub\WriterInterface $writer)
     {
         $this->writer = $writer;
     }
@@ -54,7 +56,7 @@ class StandardOpf
         <item media-type="application/xhtml+xml" id="toc" href="navigation-documents.xhtml" properties="nav"/>
 XML;
 
-        foreach (glob(Constants::PATH_IMAGE . '/*.jpg') as $each) {
+        foreach (glob(Epub\Constants::PATH_IMAGE . '/*.jpg') as $each) {
             $filename = pathinfo($each, PATHINFO_FILENAME);
             $xml .= <<<XML
         <item media-type="application/xhtml+xml" id="p-{$filename}" href="xhtml/{$filename}.xhtml"/>
@@ -69,7 +71,7 @@ XML;
 
 XML;
 
-        foreach (glob(Constants::PATH_IMAGE . '/*.jpg') as $k => $v) {
+        foreach (glob(Epub\Constants::PATH_IMAGE . '/*.jpg') as $k => $v) {
             $filename = pathinfo($each, PATHINFO_FILENAME);
             $filename = pathinfo($v, PATHINFO_FILENAME);
             $xml .= <<<XML

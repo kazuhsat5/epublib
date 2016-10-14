@@ -7,14 +7,14 @@
  * @copyright Copyright (C) 2015-2016 J-Comic Terrace Corporation. All Rights Reserved.
  */
 
-namespace Jcomi\Epub;
+namespace Jcomi\Epub\Util;
 
 /**
- * IOUtil
+ * IO
  *
  * @author kazuhsat <kazuhiro.sato@j-comi.co.jp>
  */
-class IOUtil
+class IO
 {
     /**
      * ディレクトリの作成を行う

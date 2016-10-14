@@ -20,7 +20,7 @@ class Constants
     const PATH_META_INF   = 'META-INF';
     const PATH_ITEM       = 'item';
     const PATH_IMAGE      = self::PATH_ITEM . '/image';
-    const PATH_ITEM_XHTML = self::PATH_ITEM . '/xhtml';
+    const PATH_XHTML      = self::PATH_ITEM . '/xhtml';
 
     /**
      * ファイルパス
@@ -30,6 +30,7 @@ class Constants
     const PATH_CONTAINER_XML = self::PATH_META_INF . '/container.xml';
     const PATH_STANDARD_OPF  = self::PATH_ITEM . '/standard.opf';
     const PATH_NAV_DOC_XHTML = self::PATH_ITEM . '/navigation-documents.xhtml';
+    const PATH_ITEM_XHTML    = self::PATH_XHTML . '/%s.xhtml';
 
     /**
      * Mimeタイプ

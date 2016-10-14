@@ -7,14 +7,14 @@
  * @copyright Copyright (C) 2015-2016 J-Comic Terrace Corporation. All Rights Reserved.
  */
 
-namespace Jcomi\Epub;
+namespace Jcomi\Epub\File;
 
 /**
- * StandardOpf
+ * NavigationDocumentsXhtml
  *
  * @author kazuhsat <kazuhiro.sato@j-comi.co.jp>
  */
-class StandardOpf
+class NavigationDocumentsXhtml
 {
     /**
      * Writer
@@ -43,44 +43,49 @@ class StandardOpf
     {
         $xml = <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
-<package xmlns="http://www.idpf.org/2007/opf" version="3.0" xml:lang="ja" unique-identifier="unique-id" prefix="ebpaj: http://www.ebpaj.jp/">
-    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
-        <dc:identifier id="unique-id">-</dc:identifier>
-        <dc:language>ja</dc:language>
-        <dc:title id="title">title</dc:title>
-        <meta property="dcterms:modified">2016-10-01T00:00:00Z</meta>
-    </metadata>
-    <manifest>
-        <item media-type="application/xhtml+xml" id="toc" href="navigation-documents.xhtml" properties="nav"/>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="ja">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Navigation</title>
+    </head>
+    <body>
+        <nav epub:type="toc" id="toc">
+            <h1>Navigation</h1>
+            <ol>
+
 XML;
 
         foreach (glob(Constants::PATH_IMAGE . '/*.jpg') as $each) {
             $filename = pathinfo($each, PATHINFO_FILENAME);
             $xml .= <<<XML
-        <item media-type="application/xhtml+xml" id="p-{$filename}" href="xhtml/{$filename}.xhtml"/>
-        <item media-type="image/jpeg" id="{$filename}" href="image/{$filename}.jpg" />
+                <li><a href="xhtml/{$filename}.xhtml">{$filename}</a></li>
 
 XML;
         }
 
         $xml .= <<<XML
-    </manifest>
-    <spine>
+            </ol>
+        </nav>
+        <nav epub:type="landmarks" id="guide">
+            <h1>Guide</h1>
+            <ol>
 
 XML;
 
-        foreach (glob(Constants::PATH_IMAGE . '/*.jpg') as $k => $v) {
+        foreach (glob(Constants::PATH_IMAGE . '/*.jpg') as $each) {
             $filename = pathinfo($each, PATHINFO_FILENAME);
-            $filename = pathinfo($v, PATHINFO_FILENAME);
             $xml .= <<<XML
-        <itemref idref="p-{$filename}" />
+                <li><a epub:type="cover" href="xhtml/{$filename}.xhtml">{$filename}</a></li>
 
 XML;
         }
 
-        $xml .= <<<XML
-    </spine>
-</package>
+            $xml .= <<<XML
+            </ol>
+        </nav>
+    </body>
+</html>
 XML;
 
         $this->writer->write($xml);

@@ -7,14 +7,14 @@
  * @copyright Copyright (C) 2015-2016 J-Comic Terrace Corporation. All Rights Reserved.
  */
 
-namespace Jcomi\Epub;
+namespace Jcomi\Epub\File;
 
 /**
- * Mimetype
+ * ItemXhtml
  *
  * @author kazuhsat <kazuhiro.sato@j-comi.co.jp>
  */
-class Mimetype
+class ItemXhtml
 {
     /**
      * Writer
@@ -37,10 +37,27 @@ class Mimetype
     /**
      * 書き出す
      *
+     * @param String $filename
      * @return boolean
      */
-    public function write()
+    public function write($filename)
     {
-        $this->writer->write(Constants::MIMETYPE);
+        $xml = <<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="ja">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>{$filename}</title>
+    </head>
+    <body>
+        <div class="main">
+            <p><img src="../image/{$filename}.jpg" alt=""/></p>
+        </div>
+    </body>
+</html>
+XML;
+
+        $this->writer->write($xml);
     }
 }

@@ -10,11 +10,11 @@
 namespace Jcomi\Epub\Util;
 
 /**
- * IO
+ * FileSystem
  *
  * @author kazuhsat <kazuhiro.sato@j-comi.co.jp>
  */
-class IO
+class FileSystem
 {
     /**
      * ディレクトリの作成を行う
